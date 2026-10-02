@@ -1,0 +1,16 @@
+services:
+  global-tsaco-control:
+    build: .
+    image: global-tsaco-control:latest
+    container_name: global-tsaco-control
+    # Host 5173 keeps the URL the same as the systemd deployment on
+    # 172.23.191.54. When running several copies on one host, change only
+    # the host side: "5174:80", "5175:80", ...
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

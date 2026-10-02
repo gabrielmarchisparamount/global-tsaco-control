@@ -1,0 +1,232 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #0d1b2a;
+  color: #e0e6ed;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #1c3049;
+}
+.topBar .title { font-size: 1.2em; font-weight: 700; }
+.topNav { display: flex; gap: 6px; }
+
+/* ---- command log ---- */
+.logView { padding: 16px; overflow-y: auto; }
+.logHeader { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logHeader h2 { margin: 0; }
+.logActions { display: flex; gap: 8px; align-items: center; }
+.logActions .search { width: 220px; margin: 0; }
+.logNote { opacity: 0.7; font-size: 0.85em; max-width: 90ch; }
+.logTable { font-size: 0.9em; }
+.logTable td { vertical-align: top; }
+.logRow { border-bottom: 1px solid #16273d; cursor: pointer; }
+.logRow:nth-child(even) { background: #10202f; }
+.logTime { white-space: nowrap; }
+.logTable .sub { display: block; font-size: 0.82em; opacity: 0.6; margin-top: 2px; }
+.logStatus { font-weight: 600; }
+.logStatus.applied, .logStatus.ok, .logStatus.acked { color: #6fce6f; }
+.logStatus.sent { color: #e0a83a; }
+.logStatus.unconfirmed { color: #e0a83a; }
+.logStatus.error { color: #e5484d; }
+.logDetail {
+  margin: 6px 0 0;
+  padding: 8px;
+  background: #0b1725;
+  border: 1px solid #1c3049;
+  border-radius: 4px;
+  font-size: 0.85em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.workstationRow {
+  display: grid;
+  grid-template-columns: 140px 260px 1fr;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid #2a3f5f;
+  border-radius: 6px;
+}
+.workstationRow input {
+  padding: 8px; border-radius: 4px;
+  border: 1px solid #2a3f5f; background: #16273d; color: #e0e6ed;
+}
+.workstationRow .subtle { font-size: 0.82em; opacity: 0.7; }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  flex: 1;
+  min-height: 0;
+}
+.leftPanel { overflow-y: auto; border-right: 1px solid #1c3049; }
+.rightPanel { padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+
+.serverConfig { padding: 16px; max-width: 800px; }
+.serverTable { margin-bottom: 24px; }
+.serverTable td.ok { color: #6fce6f; }
+.serverTable td.error { color: #e5484d; }
+.serverTable td.empty { opacity: 0.6; text-align: center; }
+.serverForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.serverForm input {
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #2a3f5f;
+  background: #16273d;
+  color: #e0e6ed;
+}
+
+.search {
+  width: 100%;
+  padding: 10px;
+  background: #16273d;
+  border: 1px solid #2a3f5f;
+  color: #e0e6ed;
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px 12px; text-align: left; }
+th { background: #16273d; }
+.channelRow { cursor: pointer; border-bottom: 1px solid #16273d; }
+.channelRow.dark { background: #10202f; }
+.channelRow.selected { outline: 2px solid #4a90d9; }
+/* Source letter is colour-coded by which source it is, in both the Main and
+   Backup columns: A green, B orange, C/D red. An unresolved letter stays the
+   default text colour rather than implying a severity. */
+.path { font-weight: bold; }
+.path.A { color: #6fce6f; }
+.path.B { color: #e0a83a; }
+.path.C,
+.path.D { color: #e5484d; }
+td.server { opacity: 0.7; font-size: 0.9em; }
+.status.desync { background: #b23a3a; color: white; }
+
+/* ---- region / group / page tabs ---- */
+.regionTabs, .groupTabs, .pagination { display: flex; gap: 8px; flex-wrap: wrap; }
+.regionTab, .groupTab, .pageTab { flex: 1; min-width: 90px; }
+.regionTab.active, .groupTab.active, .pageTab.active { background: #4a90d9; border-color: #4a90d9; }
+.homeDot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: #6fce6f; margin-left: 6px; vertical-align: middle;
+}
+.groupTab .sortHint { display: block; font-size: 0.7em; opacity: 0.75; }
+.settingsButton { flex: 0 0 auto; min-width: 44px; font-size: 1.1em; }
+
+/* ---- server status ---- */
+.serverStatusRow { display: flex; gap: 8px; flex-wrap: wrap; }
+.serverStatusRow.empty { opacity: 0.6; font-size: 0.9em; }
+.serverBox {
+  flex: 1 1 45%;
+  border: 1px solid #2a3f5f;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.85em;
+}
+.serverBox.disconnected { border-color: #b23a3a; }
+.serverBox.connecting { border-color: #e0a83a; }
+.serverBox.unknown { opacity: 0.55; }
+.serverBox.muted .serverName { font-style: italic; opacity: 0.8; }
+.serverName { font-weight: 600; margin-bottom: 4px; }
+.serverStatusLine { display: flex; align-items: center; gap: 6px; opacity: 0.85; }
+.pip { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+.pip.connected { background: #6fce6f; }
+.pip.connecting { background: #e0a83a; }
+.pip.disconnected { background: #b23a3a; }
+.pip.unknown { background: #6b7a8c; }
+
+/* ---- modals ---- */
+.modalBackdrop {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6);
+  display: flex; align-items: center; justify-content: center; z-index: 50;
+}
+.modal {
+  background: #0f2033;
+  border: 1px solid #2a3f5f;
+  border-radius: 8px;
+  padding: 20px;
+  width: min(900px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.modal.challenge { width: min(480px, 92vw); }
+.modalHeader { display: flex; justify-content: space-between; align-items: center; }
+.modalHeader h2 { margin: 0; }
+.modalNote { opacity: 0.7; font-size: 0.85em; }
+.modal .warn { color: #e0a83a; }
+.challengeActions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+button.danger { background: #8c2f2f; border-color: #b23a3a; }
+
+.settingsBody { display: grid; grid-template-columns: 240px 1fr; gap: 20px; margin-top: 12px; }
+.groupsPane h3, .channelsPane h3 { margin: 0 0 8px; font-size: 1em; }
+.channelsPane .subtle { font-weight: 400; opacity: 0.7; font-size: 0.85em; }
+.groupList { list-style: none; padding: 0; margin: 0 0 10px; }
+.groupList li { display: flex; gap: 3px; margin-bottom: 4px; align-items: stretch; }
+.groupList li.active .groupPick { background: #4a90d9; border-color: #4a90d9; }
+.groupPick { flex: 1; min-width: 0; text-align: left; overflow: hidden; text-overflow: ellipsis; }
+.groupPick .count { opacity: 0.6; font-size: 0.8em; margin-left: 6px; }
+.iconBtn { padding: 6px 7px; line-height: 1; flex: 0 0 auto; }
+.renameForm { display: flex; gap: 3px; flex: 1; }
+.renameForm input {
+  flex: 1; min-width: 0; padding: 6px 8px; border-radius: 4px;
+  border: 1px solid #4a90d9; background: #16273d; color: #e0e6ed;
+}
+.modalError { color: #e5484d; font-size: 0.9em; margin: 4px 0; }
+.channelsToolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.channelsToolbar .search { margin-bottom: 0; flex: 1; }
+.addGroup { display: flex; gap: 4px; }
+.addGroup input {
+  flex: 1; min-width: 0; padding: 8px; border-radius: 4px;
+  border: 1px solid #2a3f5f; background: #16273d; color: #e0e6ed;
+}
+.settingsChannelTable { font-size: 0.9em; }
+.settingsChannelTable th:not(:first-child),
+.settingsChannelTable td:not(:first-child) { text-align: center; width: 90px; }
+.modal .search { margin-bottom: 8px; }
+.modal .empty { opacity: 0.6; font-size: 0.9em; }
+td.empty { text-align: center; opacity: 0.6; padding: 20px; }
+
+.controlPanel { display: flex; flex-direction: column; gap: 16px; }
+.selectionControls, .modeControls, .acoControls { display: flex; gap: 8px; }
+.acoControls { flex-direction: column; }
+.switchSection { display: flex; align-items: center; gap: 8px; }
+/* Fixed-width label keeps the Main and Backup button columns aligned. */
+.switchSection .header { flex: 0 0 88px; }
+.switches { display: flex; gap: 6px; flex: 1; }
+/* The source switches are the primary control — make them a large target. */
+.switches button {
+  flex: 1;
+  min-width: 52px;
+  padding: 18px 4px;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+button {
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1px solid #2a3f5f;
+  background: #16273d;
+  color: #e0e6ed;
+  cursor: pointer;
+}
+button.active { background: #4a90d9; }
+button.requested { outline: 2px dashed #e0a83a; outline-offset: 2px; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+.lockButton.locked { background: #1f7a3d; }
+.lockButton.unlocked { background: #16273d; }
+.lockButton .subtext { display: block; font-size: 0.7em; opacity: 0.7; }

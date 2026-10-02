@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.log
+
+# Local editor / OS noise
+.DS_Store
+.vscode/
+.idea/
+
+# Never commit real credentials or certs. Appliance logins live in each
+# operator's browser localStorage, not in this repo — keep it that way.
+.env
+.env.*
+*.pem
+*.key
+*.crt
