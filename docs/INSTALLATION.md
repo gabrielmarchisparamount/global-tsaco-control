@@ -186,7 +186,15 @@ The build needs the source tree, not just the built output.
 
 **Already on this host:** `/data/victoria/techex-ui-replica`.
 
-**Onto a new host** — copy the source, excluding build artefacts:
+**Onto a new host — clone it** (the repo is private, so the host needs
+GitHub access; `gh auth login`, an SSH key, or a token):
+
+```bash
+git clone https://github.com/gabrielmarchisparamount/global-tsaco-control.git
+cd global-tsaco-control
+```
+
+**Or copy the source directly**, if the target has no GitHub access:
 
 ```bash
 rsync -av --exclude node_modules --exclude dist \

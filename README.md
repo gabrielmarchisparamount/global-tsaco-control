@@ -22,6 +22,9 @@ What it adds over the vendor UI:
 > Throughout the documentation, "Engineer UI" refers to the *vendor's*
 > product. Global TSACO Control is the replacement frontend in this repo.
 
+**Repository:** <https://github.com/gabrielmarchisparamount/global-tsaco-control> (private)
+— contains internal appliance addresses and site IP ranges, so keep it that way.
+
 ---
 
 ## Documentation

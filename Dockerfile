@@ -24,7 +24,7 @@ FROM nginx:1.30-alpine
 LABEL org.opencontainers.image.title="Global TSACO Control" \
       org.opencontainers.image.description="Web UI for Techex TSACO changeover control across multiple appliances, with CCC/LMC regions, channel groups, paging and a local command audit log" \
       org.opencontainers.image.version="0.3.0" \
-      org.opencontainers.image.source="/data/victoria/techex-ui-replica"
+      org.opencontainers.image.source="https://github.com/gabrielmarchisparamount/global-tsaco-control"
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
